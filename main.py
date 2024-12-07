@@ -1,9 +1,13 @@
 import h5py
 import numpy as np
 from matplotlib import pyplot as plt
+from matplotlib.gridspec import GridSpec
+from matplotlib.ticker import AutoMinorLocator
 
-f = h5py.File("J0953+0755_602MHz_07Mar14_SP_I.hdf5", 'r')
-data = np.array(f.get('default'))
+# Load data
+filename = "J0953+0755_602MHz_07Mar14_SP_I.hdf5"
+with h5py.File(filename, 'r') as f:
+    data = np.array(f.get('default'))
 
 def stddev(data, row):
     left_border = 0
@@ -51,9 +55,6 @@ total_energy2 = []
 for i in total_energy:
     total_energy2.append(i/max(total_energy))
 
-from matplotlib.gridspec import GridSpec
-from matplotlib.ticker import AutoMinorLocator
-
 def format_axes(fig):
     for i, ax in enumerate(fig.axes):
         ax.xaxis.set_minor_locator(AutoMinorLocator(2))
@@ -61,23 +62,26 @@ def format_axes(fig):
         ax.tick_params(which='major', direction='in', length=5, top=True, right=True)
         ax.tick_params(which='minor', direction='in', length=2, top=True, right=True)
 
-fig = plt.figure(figsize=(6, 9)) #, facecolor='silver')
-
+# Plotting
+fig = plt.figure(figsize=(6, 9))
 gs0 = GridSpec(6, 10, figure=fig, wspace=0, hspace=0)
 gs1 = GridSpec(6, 22, figure=fig, hspace=0)
 
+# Fluctuation spectra
 ax1 = fig.add_subplot(gs0[:5, 2:9])
 img = ax1.imshow(new_data, cmap='hot', aspect='auto', origin='lower', vmin=0, vmax=600)
 ax1.set_xticks([])
 ax1.set_yticks([])
 ax1.text(75, r_max-r_min+0.5, "Fluctuation spectra")
 
+# Total energy
 ax2 = fig.add_subplot(gs0[:5, :2])
 ax2.plot(total_energy2, [_ for _ in range(len(total_energy2))], 'indigo', drawstyle='steps-pre')
 ax2.margins(0.1, 0)
 ax2.set_ylabel("Pulse Number")
 ax2.text(-0.07, len(total_energy2), "Total energy")
 
+# Average profile
 ax3 = fig.add_subplot(gs0[5, 2:9])
 ax3.plot([(499+i)/3.6 for i in range(250)], new_data2/100, 'indigo')
 ax3.margins(0, 0.1)
@@ -85,17 +89,20 @@ ax3.set_xlabel("Pulse Phase (°)")
 ax3.set_ylabel("Intensity")
 ax3.text(755/3.6, max(new_data2)/100, "Average profile", rotation=-90, rotation_mode="anchor")
 
+# Colorbar
 ax4 = fig.add_subplot(gs1[:5, 20])
 plt.colorbar(img, cax=ax4)
 ax4.set_ylabel("Flux (arbitrary units)")
 
+# Add title and format
 fig.suptitle("J0953+0755", x=0.56, y=0.96, size="xx-large", weight=800)
 format_axes(fig)
 
+# Pulse width metrics
 print(f"W50 = {pulse_width_peak(0.5)[0]} ms")
 print(f"W50 = {pulse_width_peak(0.5)[1]}°")
 print(f"W10 = {pulse_width_peak(0.1)[0]} ms")
 print(f"W10 = {pulse_width_peak(0.1)[1]}°")
 
+# Show plot
 plt.show()
-f.close()
