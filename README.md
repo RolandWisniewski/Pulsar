@@ -37,14 +37,14 @@ Generates a unique, stylized visualization of pulse data with a black background
 
 ## 🔧 How to Run
 
-###Prerequisites
+### Prerequisites
 * Python 3.x
 * Required libraries:
 ```bash
 pip install h5py numpy matplotlib
 ```
 
-###Run the Code
+### Run the Code
 1. Ensure the dataset is in the same directory as the script.
 2. Execute the script:
 ```bash
@@ -61,9 +61,15 @@ W10 = 19.71 ms
 W10 = 9.99°
 ```
 2. Plots
+ * A comprehensive pulsar analysis with three panels and a colorbar
 
 <p align="center">
  <img src="https://github.com/user-attachments/assets/5ce3de23-eb20-48a4-9cbd-24f609cb814f">
+</p>
+
+* Artistic rendering of pulse intensities
+
+<p align="center">
  <img src="https://github.com/user-attachments/assets/a55755c8-2fcb-4e3d-b585-8d1aa4119414">
 </p>
 
