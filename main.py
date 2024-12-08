@@ -10,6 +10,7 @@ with h5py.File(filename, 'r') as f:
     data = np.array(f.get('default'))
 
 def stddev(data, row):
+    """Compute standard deviation for a sliding window."""
     left_border = 0
     right_border = 100
     avg = 0
@@ -24,8 +25,17 @@ def stddev(data, row):
     right_border = left_border + 100
     avg = sum(data_row[left_border:right_border]) / 100
     return data_row - avg
-
+    
+def format_axes(fig):
+    """Format plot axes with minor ticks."""
+    for i, ax in enumerate(fig.axes):
+        ax.xaxis.set_minor_locator(AutoMinorLocator(2))
+        ax.yaxis.set_minor_locator(AutoMinorLocator(2))
+        ax.tick_params(which='major', direction='in', length=5, top=True, right=True)
+        ax.tick_params(which='minor', direction='in', length=2, top=True, right=True)
+        
 def pulse_width_peak(x):
+    """Calculate pulse width (W) and width-to-separation time (WST)."""
     ms = 0.256
     m = max(new_data2)
     f1 = [i for i, j in enumerate(new_data2) if j == m][0]
@@ -38,11 +48,13 @@ def pulse_width_peak(x):
     WST = round(((W/1000*360)/0.71), 2)
     return W, WST
 
+# Process data
 row = 1245
-new_data = []
-total_energy = []
 r_min = row
 r_max = 1309
+new_data = []
+total_energy = []
+
 while row <= r_max-1:
     total_energy.append(np.sum(stddev(data, row)))
     new_data = np.append(new_data, stddev(data, row)[500:750])
@@ -51,16 +63,10 @@ while row <= r_max-1:
 new_data = new_data.reshape(r_max-r_min, 250)
 new_data2 = np.apply_along_axis(np.mean, 0 , new_data)
 
+# Normalize total energy
 total_energy2 = []
 for i in total_energy:
     total_energy2.append(i/max(total_energy))
-
-def format_axes(fig):
-    for i, ax in enumerate(fig.axes):
-        ax.xaxis.set_minor_locator(AutoMinorLocator(2))
-        ax.yaxis.set_minor_locator(AutoMinorLocator(2))
-        ax.tick_params(which='major', direction='in', length=5, top=True, right=True)
-        ax.tick_params(which='minor', direction='in', length=2, top=True, right=True)
 
 # Plotting
 fig = plt.figure(figsize=(6, 9))
