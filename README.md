@@ -63,8 +63,8 @@ W10 = 9.99°
 2. Plots
 
 <p align="center">
- <img src="https://github.com/user-attachments/assets/5ce3de23-eb20-48a4-9cbd-24f609cb814f" width="600">
- <img src="https://github.com/user-attachments/assets/a55755c8-2fcb-4e3d-b585-8d1aa4119414" width="600">
+ <img src="https://github.com/user-attachments/assets/5ce3de23-eb20-48a4-9cbd-24f609cb814f">
+ <img src="https://github.com/user-attachments/assets/a55755c8-2fcb-4e3d-b585-8d1aa4119414">
 </p>
 
 ## 🤝 Contribution
