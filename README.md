@@ -35,16 +35,17 @@ Generates a unique, stylized visualization of pulse data with a black background
 * Rows: Represent individual pulses.
 * Columns: Represent data points within each pulse.
 
-## 🔧 How to Run
+## 🛠 Requirements
 
-### Prerequisites
+To run this script, you'll need:
 * Python 3.x
 * Required libraries:
-```bash
-pip install h5py numpy matplotlib
-```
+  - `h5py`
+  - `numpy`
+  - `matplotlib`
 
-### Run the Code
+## 🔧 How to Run
+
 1. Ensure the dataset is in the same directory as the script.
 2. Execute the script:
 ```bash
