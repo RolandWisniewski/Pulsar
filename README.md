@@ -61,6 +61,7 @@ W10 = 19.71 ms
 W10 = 9.99°
 ```
 2. Plots
+
 ![Figure_2 0](https://github.com/user-attachments/assets/5ce3de23-eb20-48a4-9cbd-24f609cb814f)
 ![Figure_2 1](https://github.com/user-attachments/assets/a55755c8-2fcb-4e3d-b585-8d1aa4119414)
 
