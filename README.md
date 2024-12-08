@@ -1,6 +1,6 @@
 # 🌌 Pulsar Data Visualization
 
-This project visualizes pulsar data for J0953+0755, focusing on pulse intensity and pulse phase fluctuations. The analysis includes standard deviation filtering, total energy computation, and a detailed visualization of the pulsar's fluctuation spectra, average profile, and total energy. The code also computes and displays pulse width metrics such as W_{50} and W_{10}.
+This project visualizes pulsar data for J0953+0755, focusing on pulse intensity and pulse phase fluctuations. The analysis includes standard deviation filtering, total energy computation, and a detailed visualization of the pulsar's fluctuation spectra, average profile, and total energy. The code also computes and displays pulse width metrics such as $$W_{50}$$ and $W_{10}$.
 
 ## 🤝 Contribution
 
