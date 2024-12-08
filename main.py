@@ -110,5 +110,40 @@ print(f"W50 = {pulse_width_peak(0.5)[1]}°")
 print(f"W10 = {pulse_width_peak(0.1)[0]} ms")
 print(f"W10 = {pulse_width_peak(0.1)[1]}°")
 
-# Show plot
+# Show first plot
+plt.show()
+
+# Create new Figure with black background
+fig = plt.figure(figsize=(8, 8), facecolor='black')
+
+# Add a subplot with no frame
+ax = plt.subplot(frameon=False)
+
+# Plot each row of the data with dynamic scaling and line width
+X = np.linspace(-1, 1, new_data.shape[-1])
+G = 0.005
+for i in range(len(new_data)-1, -1, -1):
+    xscale = 1 - i / 200
+    lw = 1.5 - i / 100
+    x = xscale * X
+    y = i + G * new_data[i]
+    ax.fill_between(x, y, y+0.2, color="white", lw=lw)
+    ax.fill_between(x, y, color="black", lw=lw)
+
+# Set y limit (or first line is cropped because of thickness)
+ax.set_ylim(-1, 70)
+
+# No ticks
+ax.set_xticks([])
+ax.set_yticks([])
+
+# 2 part titles to get different font weights
+ax.text(0.5, 1.0, "PULSAR ", transform=ax.transAxes,
+        ha="right", va="bottom", color="w",
+        family="sans-serif", fontweight="bold", fontsize=16)
+ax.text(0.5, 1.0, "J0953+0755", transform=ax.transAxes,
+        ha="left", va="bottom", color="w",
+        family="sans-serif", fontweight="light", fontsize=16)
+
+# Show second plot
 plt.show()
